@@ -2,5 +2,5 @@ package com.example.android.movies
 
 class MoviesResponse {
 
-     lateinit var data: List<Movie>
+      var data: List<Movie> = listOf()
 }
