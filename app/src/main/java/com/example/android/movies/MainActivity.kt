@@ -2,7 +2,6 @@ package com.example.android.movies
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.RecyclerView
 import android.widget.Toast
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -14,16 +13,16 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MainActivity : AppCompatActivity() {
 
     private lateinit var moviesAdapter: MoviesAdapter
-    private lateinit var moviesList: RecyclerView
+    private lateinit var moviesList: MoviesResponse
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        moviesAdapter= MoviesAdapter(this)
+        moviesAdapter = MoviesAdapter()
         movies_list.adapter = moviesAdapter
 
-        moviesList = findViewById(R.id.movies_list)
+        //moviesList = findViewById(R.id.movies_list)
 
         val retrofit: Retrofit = Retrofit.Builder()
                 .baseUrl("https://api.themoviedb.org")
@@ -36,12 +35,14 @@ class MainActivity : AppCompatActivity() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    moviesAdapter.setMovies(it)
+                    moviesAdapter.addMovies(it.results)
                 }, {
-                Toast.makeText(applicationContext, it.message, Toast.LENGTH_SHORT).show()
+                    it.printStackTrace()
                 })
     }
 
 
 }
+
+
 

@@ -25,7 +25,7 @@ class Movie{
 //    var tagline :String? = null
     var title :String? = null
     //var video :Boolean = false
-    var vote_average :Int = 0
+    var vote_average :Double = 0.0
     //var vote_count :Int = 0
 
 }
