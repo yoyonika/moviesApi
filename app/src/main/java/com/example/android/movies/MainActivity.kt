@@ -13,7 +13,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MainActivity : AppCompatActivity() {
 
     private lateinit var moviesAdapter: MoviesAdapter
-    private lateinit var moviesList: MoviesResponse
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,8 +20,10 @@ class MainActivity : AppCompatActivity() {
 
         moviesAdapter = MoviesAdapter()
         movies_list.adapter = moviesAdapter
-
-        //moviesList = findViewById(R.id.movies_list)
+        swipe_refresh.setOnRefreshListener {
+                Toast.makeText(this, "Refreshed", Toast.LENGTH_SHORT).show()
+                swipe_refresh.isRefreshing= false
+        }
 
         val retrofit: Retrofit = Retrofit.Builder()
                 .baseUrl("https://api.themoviedb.org")

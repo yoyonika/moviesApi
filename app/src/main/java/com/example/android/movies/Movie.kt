@@ -1,6 +1,6 @@
 package com.example.android.movies
 
-class Movie{
+class Movie {
 
 //    var adult :Boolean = false
 //    var backdrop_path :String? = null
