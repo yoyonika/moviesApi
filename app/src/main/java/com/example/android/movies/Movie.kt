@@ -1,6 +1,8 @@
 package com.example.android.movies
 
-class Movie {
+import android.widget.ImageView
+
+ class Movie {
 
 //    var adult :Boolean = false
 //    var backdrop_path :String? = null
@@ -14,7 +16,7 @@ class Movie {
 //    var original_title :String? = null
     var overview :String? = null
 //    var popularity :Int = 0
-//    var poster_path :String? = null
+    var poster_path :String? = null
 //    var production_companies :String? = null
 //    var production_countries :String? = null
 //    var release_date :String? = null

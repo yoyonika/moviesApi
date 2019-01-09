@@ -2,6 +2,9 @@ package com.example.android.movies
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ImageView
 import android.widget.Toast
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -20,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         moviesAdapter = MoviesAdapter()
         movies_list.adapter = moviesAdapter
+
         swipe_refresh.setOnRefreshListener {
                 Toast.makeText(this, "Refreshed", Toast.LENGTH_SHORT).show()
                 swipe_refresh.isRefreshing= false
