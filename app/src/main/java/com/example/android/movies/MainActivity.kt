@@ -25,8 +25,12 @@ class MainActivity : AppCompatActivity() {
         movies_list.adapter = moviesAdapter
 
         swipe_refresh.setOnRefreshListener {
-                Toast.makeText(this, "Refreshed", Toast.LENGTH_SHORT).show()
-                swipe_refresh.isRefreshing= false
+            Toast.makeText(this, "Refreshed", Toast.LENGTH_SHORT).show()
+            swipe_refresh.isRefreshing = false
+            //logic to get the data again
+            // clear recyc
+            // make new api call
+            // update recyc
         }
 
         val retrofit: Retrofit = Retrofit.Builder()
@@ -46,8 +50,11 @@ class MainActivity : AppCompatActivity() {
                 })
     }
 
-
+    //start details activity - first
 }
+
+
+
 
 
 
