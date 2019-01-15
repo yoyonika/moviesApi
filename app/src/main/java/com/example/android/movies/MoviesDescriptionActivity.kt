@@ -2,7 +2,6 @@ package com.example.android.movies
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_movies_description.*
 
 class MoviesDescriptionActivity : AppCompatActivity() {
@@ -19,7 +18,7 @@ class MoviesDescriptionActivity : AppCompatActivity() {
         setContentView(R.layout.activity_movies_description)
 
         // get data from intent
-          var title = ""
+        var title = ""
         var description= ""
 
         if (intent.hasExtra(KEY_TITLE)){

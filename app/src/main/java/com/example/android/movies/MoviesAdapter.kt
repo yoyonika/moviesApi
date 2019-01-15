@@ -6,11 +6,11 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import com.bumptech.glide.Glide
 import com.example.android.movies.MoviesDescriptionActivity.Companion.KEY_TITLE
 import com.example.android.movies.MoviesDescriptionActivity.Companion.KEY_DESCRIPTION
+import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.movie_layout.view.*
 
 class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
@@ -41,6 +41,7 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
         notifyDataSetChanged()
     }
 
+
     inner class MoviesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val movieDescription: TextView = itemView.movieOverview
@@ -48,6 +49,8 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
         private val movieHeading: TextView = itemView.movieTitle
         private var moviePoster: ImageView = itemView.image
         private var cardView: CardView = itemView.card
+        private val searchView: EditText = itemView.searchView
+        private var searchButton: Button = itemView.search_button
 
         fun bindModel(movie: Movie) {
             movieHeading.text = movie.title
@@ -58,26 +61,18 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
                     .load(IMAGE_BASE_URL + movie.poster_path)
                     .into(moviePoster)
 
-       cardView.setOnClickListener {view ->
-           val intent = Intent(view.context, MoviesDescriptionActivity::class.java)
+            cardView.setOnClickListener { view ->
+                val intent = Intent(view.context, MoviesDescriptionActivity::class.java)
 
-           intent.putExtra(KEY_TITLE, movie.title)
-           intent.putExtra(KEY_DESCRIPTION, movie.overview)
-           view.context.startActivity(intent)
-       }
+                intent.putExtra(KEY_TITLE, movie.title)
+                intent.putExtra(KEY_DESCRIPTION, movie.overview)
+                view.context.startActivity(intent)
+            }
         }
-
 
         //make an interface
         //call that interface in the adapter
         //come back to the setonclick listener to call that interface so that you can get access to the description
 
-
-//        fun bind(item: ViewItem, pos: Int, listener: (Int) -> Unit) = with(itemView) {
-//            val cvItem = findViewById<CardView>(R.id.cv_item)
-//            image.setOnClickListener {
-//                listener(pos)
-//            }
-        //}}
     }
 }

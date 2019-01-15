@@ -48,6 +48,16 @@ class MainActivity : AppCompatActivity() {
                 }, {
                     it.printStackTrace()
                 })
+
+         fun beginSearch (search: String) {
+             val disposable = apiMovies.searchMovies("query")
+                     .subscribeOn(Schedulers.io())
+                     .observeOn(AndroidSchedulers.mainThread())
+                     .subscribe({ (it.results)
+                     }, {it.printStackTrace()
+                     })
+
+        }
     }
 
     //start details activity - first
