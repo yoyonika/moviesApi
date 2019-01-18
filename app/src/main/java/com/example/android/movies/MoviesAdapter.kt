@@ -37,6 +37,7 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
     }
 
     fun addMovies (movies: Collection<Movie>){
+        adapterMoviesList.clear()
         adapterMoviesList.addAll(movies)
         notifyDataSetChanged()
     }
@@ -49,8 +50,7 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
         private val movieHeading: TextView = itemView.movieTitle
         private var moviePoster: ImageView = itemView.image
         private var cardView: CardView = itemView.card
-        private val searchView: EditText = itemView.searchView
-        private var searchButton: Button = itemView.search_button
+
 
         fun bindModel(movie: Movie) {
             movieHeading.text = movie.title

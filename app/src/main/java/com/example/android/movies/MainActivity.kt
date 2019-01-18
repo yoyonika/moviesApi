@@ -3,12 +3,11 @@ package com.example.android.movies
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.view.*
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -16,6 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MainActivity : AppCompatActivity() {
 
     private lateinit var moviesAdapter: MoviesAdapter
+    private lateinit var apiMovies: ApiMoviesInterface
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +23,10 @@ class MainActivity : AppCompatActivity() {
 
         moviesAdapter = MoviesAdapter()
         movies_list.adapter = moviesAdapter
+
+        search_button.setOnClickListener {
+            beginSearch(searchView.text.toString())
+        }
 
         swipe_refresh.setOnRefreshListener {
             Toast.makeText(this, "Refreshed", Toast.LENGTH_SHORT).show()
@@ -39,7 +43,7 @@ class MainActivity : AppCompatActivity() {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
 
-        val apiMovies = retrofit.create(ApiMoviesInterface::class.java)
+        apiMovies = retrofit.create(ApiMoviesInterface::class.java)
         apiMovies.getMovies()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -49,15 +53,18 @@ class MainActivity : AppCompatActivity() {
                     it.printStackTrace()
                 })
 
-         fun beginSearch (search: String) {
-             val disposable = apiMovies.searchMovies("query")
-                     .subscribeOn(Schedulers.io())
-                     .observeOn(AndroidSchedulers.mainThread())
-                     .subscribe({ (it.results)
-                     }, {it.printStackTrace()
-                     })
 
-        }
+    }
+
+    private fun beginSearch (search: String) {
+        val disposable = apiMovies.searchMovies(search)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    moviesAdapter.addMovies(it.results)
+                }, {it.printStackTrace()
+                })
+
     }
 
     //start details activity - first
