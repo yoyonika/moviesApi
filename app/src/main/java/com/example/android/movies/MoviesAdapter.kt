@@ -10,7 +10,6 @@ import android.widget.*
 import com.bumptech.glide.Glide
 import com.example.android.movies.MoviesDescriptionActivity.Companion.KEY_TITLE
 import com.example.android.movies.MoviesDescriptionActivity.Companion.KEY_DESCRIPTION
-import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.movie_layout.view.*
 
 class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
