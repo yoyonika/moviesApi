@@ -29,8 +29,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         swipe_refresh.setOnRefreshListener {
-            Toast.makeText(this, "Refreshed", Toast.LENGTH_SHORT).show()
             swipe_refresh.isRefreshing = false
+            addMoviesApi()
+            Toast.makeText(this, "Refreshed", Toast.LENGTH_SHORT).show()
             //logic to get the data again
             // clear recyc
             // make new api call
@@ -44,6 +45,10 @@ class MainActivity : AppCompatActivity() {
                 .build()
 
         apiMovies = retrofit.create(ApiMoviesInterface::class.java)
+        addMoviesApi()
+    }
+
+    private fun addMoviesApi() {
         apiMovies.getMovies()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -52,8 +57,6 @@ class MainActivity : AppCompatActivity() {
                 }, {
                     it.printStackTrace()
                 })
-
-
     }
 
     private fun beginSearch (search: String) {
